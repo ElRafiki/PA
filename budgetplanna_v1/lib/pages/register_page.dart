@@ -1,7 +1,10 @@
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
   @override
   _RegistrationPageState createState() => _RegistrationPageState();
 }
