@@ -1,6 +1,10 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
 class BudgetPlanerPage extends StatefulWidget {
+  const BudgetPlanerPage({super.key});
+
   @override
   _BudgetPlanerPageState createState() => _BudgetPlanerPageState();
 }
@@ -8,7 +12,7 @@ class BudgetPlanerPage extends StatefulWidget {
 class _BudgetPlanerPageState extends State<BudgetPlanerPage> {
   // Variablen für Transaktionen und Gesamtbilanz
   double _gesamtBilanz = 0.0;
-  List<Map<String, dynamic>> _transaktionen = [];
+  final List<Map<String, dynamic>> _transaktionen = [];
   final _betragController = TextEditingController();
   final _beschreibungController = TextEditingController();
 
@@ -67,18 +71,32 @@ class _BudgetPlanerPageState extends State<BudgetPlanerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Budget Planer'),
-        actions: [
-          Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'Bilanz: ${_gesamtBilanz.toStringAsFixed(2)}€',
-                style: TextStyle(fontSize: 18),
+        title: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Budget Planer',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
+              SizedBox(height: 4),
+              Text(
+                'Bilanz: ${_gesamtBilanz.toStringAsFixed(2)}€',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: _gesamtBilanz >= 0 ? Colors.green : Colors.red,
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
+        centerTitle: true,
+        toolbarHeight: 80, // Increased height for better spacing
       ),
       body: ListView.builder(
         itemCount: _transaktionen.length,
